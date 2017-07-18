@@ -59,7 +59,18 @@
 				todoList[i].isCompleted = vm.isCheckedAll;
 			}
 		};
-	//	
+	//	6 清除已经完成的任务
+        vm.delCompleted = function(){
+        	var temArr=[];
+        	for(var i=0;i<todoList.length;i++){
+        		if(!todoList[i].isCompleted){
+        			temArr.push(todoList[i]);
+				}
+			}
+		//	清空数组
+			todoList.length=0;
+			[].push.apply(todoList,temArr);
+		}
 
 
 
