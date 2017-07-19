@@ -70,13 +70,54 @@
 		//	清空数组
 			todoList.length=0;
 			[].push.apply(todoList,temArr);
-		}
-
-
-
-
-
-
+		};
+		vm.isShow=function(){
+        	var ret = false;
+        	for(var i=0;i<todoList.length;i++){
+        		if(todoList[i].isCompleted){
+        			ret = true;
+        			break;
+				}
+			}
+			return ret;
+		};
+	//	7 显示未完成的任务数
+		vm.getCount = function(){
+			var count = 0;
+			for(var i=0;i<todoList.length;i++){
+				if(!todoList[i].isCompleted){
+					count++;
+				}
+			}
+			return count;
+		};
+	//	8 显示不同状态的任务以及当前任务的高亮显示
+		vm.status = undefined;
+		// vm.selectAll = function(){
+		// 	vm.status = undefined;
+		// };
+		// vm.selectActive = function(){
+		// 	vm.status = false;
+		// };
+		// vm.selectCompleted = function(){
+		// 	vm.status = true;
+		// };
+	//	9 根据URL的变化显示相应的任务
+		 vm.location = $location;
+		 vm.$watch('location.url()',function(newVal,oldVal){
+		 	console.log(newVal);
+		 	switch(newVal){
+				case '/active':
+					vm.status = false;
+					break;
+				case '/completed':
+					vm.status = true;
+					break;
+				default:
+					vm.status = undefined;
+					break;
+			}
+		 });
 
 	}
 
